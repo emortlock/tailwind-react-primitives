@@ -72,32 +72,6 @@ jobs:
           name: Publish package
           command: npm publish
 
-  greenkeeperUpdateLockFile:
-    <<: *defaults
-    steps:
-      - checkout
-
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
-
-      - run:
-          name: Update package-lock.json
-          command: npm install
-
-      - <<: *setupGit
-
-      - run:
-          name: Commit lockfile if changed
-          command: |
-            if ! git diff-index --quiet HEAD --; then
-              git add package-lock.json &&
-              git commit -m "chore(package): update lockfile [skip ci]" &&
-              export URL=$(echo $CIRCLE_REPOSITORY_URL | cut -c 4- | tr : /) &&
-              git push https://${GH_TOKEN}${URL} $CIRCLE_BRANCH --quiet
-            fi
-
 workflows:
   version: 2
 
