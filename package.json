@@ -1,12 +1,12 @@
 {
-  "name": "tailwind-react-ui",
+  "name": "tailwind-react-primitives",
   "version": "0.8.1",
-  "description": "React component library & UI framework for use with Tailwind CSS ",
+  "description": "React component primitives that provide utility props for Tailwind CSS",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/emortlock/tailwind-react-ui.git"
+    "url": "git+https://github.com/emortlock/tailwind-react-primitives.git"
   },
-  "homepage": "https://emortlock.github.io/tailwind-react-ui/",
+  "homepage": "https://emortlock.github.io/tailwind-react-primitives/",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.js",
   "types": "./src/index.ts",
@@ -16,7 +16,7 @@
     "docs:deploy": "node ./build/deploy",
     "lint": "eslint src --ext .ts,.tsx -c ./eslint.config.js",
     "lint:fix": "npm run lint -- --fix",
-    "prepublish": "rimraf dist plugins tools && cross-env NODE_ENV=production npm run build",
+    "prepublishOnly": "rimraf dist plugins tools && cross-env NODE_ENV=production npm run build",
     "prestart": "cross-env TOOLS_ONLY=true NODE_ENV=development npm run build",
     "release": "standard-version",
     "start": "styleguidist --config ./site server --open",

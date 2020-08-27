@@ -62,7 +62,7 @@ module.exports = {
       return componentPath
     }
     const name = path.basename(componentPath, '.tsx')
-    return `import { ${name} } from 'tailwind-react-ui'`
+    return `import { ${name} } from 'tailwind-react-primitives'`
   },
   styles: {
     Pre: {
@@ -161,6 +161,6 @@ module.exports = {
     },
   },
   moduleAliases: {
-    'tailwind-react-ui': path.resolve(__dirname, '..', './src/'),
+    'tailwind-react-primitives': path.resolve(__dirname, '..', './src/'),
   },
 }

@@ -1,5 +1,5 @@
 ```jsx
-import { Box } from 'tailwind-react-ui'
+import { Box } from 'tailwind-react-primitives'
 ;<>
   <Box p={4} text="white" bg="blue-400">
     Box
@@ -8,7 +8,7 @@ import { Box } from 'tailwind-react-ui'
 ```
 
 ```jsx
-import { Box } from 'tailwind-react-ui'
+import { Box } from 'tailwind-react-primitives'
 ;<>
   <Box p={4} text="white" bg="blue-400" inlineBlock m={{ r: 4 }}>
     Box inlineBlock

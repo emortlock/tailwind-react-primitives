@@ -1,6 +1,6 @@
 # Tailwind React UI
 
-[![CircleCI](https://circleci.com/gh/emortlock/tailwind-react-ui.svg?style=svg)](https://circleci.com/gh/emortlock/tailwind-react-ui)
+[![CircleCI](https://circleci.com/gh/emortlock/tailwind-react-primitives.svg?style=svg)](https://circleci.com/gh/emortlock/tailwind-react-primitives)
 
 ---
 
@@ -25,13 +25,13 @@ Tailwind React UI's components have no inline/encapsulated styles (barring some 
 
 ### Utility Class Props
 
-Introduces a [props API](https://emortlock.github.io/tailwind-react-ui/#usage) for Tailwind's uitlity classes that allows for extensive customisation & quick prototyping
+Introduces a [props API](https://emortlock.github.io/tailwind-react-primitives/#usage) for Tailwind's uitlity classes that allows for extensive customisation & quick prototyping
 
 - Bring this functionality to your own components through the `withTailind` higher order component or by using the component primitives to have that handled down wind
 
 ### Configurable Theme
 
-Has a [configurable theme](https://emortlock.github.io/tailwind-react-ui/#theming) to apply a design system approach for the base styling of components
+Has a [configurable theme](https://emortlock.github.io/tailwind-react-primitives/#theming) to apply a design system approach for the base styling of components
 
 - Uses [React context](https://reactjs.org/docs/context.html) in order to allow for customising which color / space / etc classes get applied by default
 
@@ -52,7 +52,7 @@ Tailwind React UI's suite of components are highly composable allowing for a lar
 ## Example
 
 ```jsx
-import { Box, Flex, Touchable, Text } from 'tailwind-react-ui'
+import { Box, Flex, Touchable, Text } from 'tailwind-react-primitives'
 ;<>
   <Box maxW="md" m={{ x: 'auto' }}>
     <Box border shadow bg="white">
@@ -92,8 +92,6 @@ import { Box, Flex, Touchable, Text } from 'tailwind-react-ui'
 
 ## Useful Links
 
-- [GitHub](https://github.com/emortlock/tailwind-react-ui)
+- [GitHub](https://github.com/emortlock/tailwind-react-primitives)
 
-- [Documentation](https://emortlock.github.io/tailwind-react-ui/#documentation)
-
-- [Component demos](https://emortlock.github.io/tailwind-react-ui/#utility-components)
+- [Documentation](https://emortlock.github.io/tailwind-react-primitives/)

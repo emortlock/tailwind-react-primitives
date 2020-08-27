@@ -1,5 +1,5 @@
 ```jsx
-import { Text } from 'tailwind-react-ui'
+import { Text } from 'tailwind-react-primitives'
 ;<>
   <Text as="h3" size="3xl" bold leading="tight">
     Lorem Ipsum

@@ -1,7 +1,7 @@
 Extends `Box` with helper props to manage flex layouts
 
 ```jsx
-import { Flex, Box } from 'tailwind-react-ui'
+import { Flex, Box } from 'tailwind-react-primitives'
 ;<>
   <Flex>
     <Box p={4} bg="gray-300" flex={1} text="center">
@@ -17,7 +17,7 @@ import { Flex, Box } from 'tailwind-react-ui'
 Can set the direction by using the `col` prop
 
 ```jsx
-import { Flex, Box } from 'tailwind-react-ui'
+import { Flex, Box } from 'tailwind-react-primitives'
 ;<>
   <Flex col>
     <Box p={4} bg="gray-300" text="center">
@@ -33,7 +33,7 @@ import { Flex, Box } from 'tailwind-react-ui'
 Can switch the order using `reverse`
 
 ```jsx
-import { Flex, Box } from 'tailwind-react-ui'
+import { Flex, Box } from 'tailwind-react-primitives'
 ;<>
   <Flex reverse m={{ b: 4 }}>
     <Box p={4} bg="gray-300" flex={1} text="center">
@@ -58,7 +58,7 @@ import { Flex, Box } from 'tailwind-react-ui'
 Use `wrap` or `wrapReverse` to control how overflow content is handled
 
 ```jsx
-import { Flex, Box } from 'tailwind-react-ui'
+import { Flex, Box } from 'tailwind-react-primitives'
 ;<>
   <Flex wrap m={{ b: 4 }}>
     <Box p={4} w="2/5" bg="gray-300" text="center">

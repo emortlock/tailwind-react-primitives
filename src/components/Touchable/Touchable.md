@@ -1,5 +1,5 @@
 ```jsx
-import { Touchable, Image } from 'tailwind-react-ui'
+import { Touchable, Image } from 'tailwind-react-primitives'
 const [count, setCount] = React.useState(0)
 ;<>
   <Touchable
