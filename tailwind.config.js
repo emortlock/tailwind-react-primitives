@@ -1,10 +1,10 @@
-const plugins = require('./src/plugins')
+const plugins = require('./plugins')
 
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
   },
-  purge: [],
+  purge: false,
   theme: {
     extend: {},
   },
