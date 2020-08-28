@@ -81,10 +81,6 @@ workflows:
           filters:
             tags:
               only: /^v.*/
-      - greenkeeperUpdateLockFile:
-          filters:
-            branches:
-              only: /^greenkeeper\/.*/
       - deploy-and-publish:
           requires:
             - build
