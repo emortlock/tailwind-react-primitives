@@ -75,10 +75,6 @@ jobs:
           at: ~/tailwind-react-primitives
 
       - run:
-          name: Run styleguide generation
-          command: npm run docs
-
-      - run:
           name: Deploy to GitHub
           command: npm run docs:deploy
 
