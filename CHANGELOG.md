@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.8.8](https://github.com/emortlock/tailwind-react-primitives/compare/v0.8.7...v0.8.8) (2020-08-30)
+
+
+### Bug Fixes
+
+* **ci:** correct tag filters ([b4b6e34](https://github.com/emortlock/tailwind-react-primitives/commit/b4b6e341aa717781bc85b5c9440ec98ff8646557))
+
 ### [0.8.7](https://github.com/emortlock/tailwind-react-primitives/compare/v0.8.6...v0.8.7) (2020-08-30)
 
 
