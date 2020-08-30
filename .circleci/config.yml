@@ -13,16 +13,14 @@ setupGit: &setupGit
     git config user.name "$GH_USERNAME"
 
 jobs:
-  build:
+  install:
     <<: *defaults
     steps:
       - checkout
 
-      # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package-lock.json" }}
-            # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
       - run:
@@ -34,6 +32,16 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package-lock.json" }}
 
+      - persist_to_workspace:
+          root: ~/tailwind-react-primitives
+          paths: .
+
+  test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/tailwind-react-primitives
+
       - run:
           name: Lint code
           command: npm run lint
@@ -41,6 +49,12 @@ jobs:
       - run:
           name: Run unit tests
           command: npm test
+
+  build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/tailwind-react-primitives
 
       - run:
           name: Run build
@@ -61,6 +75,10 @@ jobs:
           at: ~/tailwind-react-primitives
 
       - run:
+          name: Run styleguide generation
+          command: npm run docs
+
+      - run:
           name: Deploy to GitHub
           command: npm run docs:deploy
 
@@ -77,11 +95,22 @@ workflows:
 
   ci:
     jobs:
-      - build:
+      - install:
           filters:
             tags:
               ignore: /.*/
+      - test:
+          requires:
+            - install
+          filters:
+            tags:
+              only: /.*/
+      - build:
+          requires:
+            - install
       - publish:
+          requires:
+            - build
           filters:
             tags:
               only: /^v.*/
