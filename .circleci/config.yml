@@ -51,14 +51,14 @@ jobs:
           command: npm run docs
 
       - persist_to_workspace:
-          root: ./
+          root: ~/tailwind-react-primitives
           paths: .
 
   deploy-and-publish:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: ./
+          at: ~/tailwind-react-primitives
 
       - run:
           name: Deploy to GitHub
@@ -66,7 +66,7 @@ jobs:
 
       - run:
           name: Authenticate with registry
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/tailwind-react-primitives/.npmrc
 
       - run:
           name: Publish package

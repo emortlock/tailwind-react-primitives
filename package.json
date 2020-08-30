@@ -16,7 +16,6 @@
     "docs:deploy": "node ./build/deploy",
     "lint": "eslint src --ext .ts,.tsx -c ./eslint.config.js",
     "lint:fix": "npm run lint -- --fix",
-    "prepublishOnly": "rimraf dist plugins tools && cross-env NODE_ENV=production npm run build",
     "prestart": "cross-env TOOLS_ONLY=true NODE_ENV=development npm run build",
     "release": "standard-version",
     "start": "styleguidist --config ./site server --open",
