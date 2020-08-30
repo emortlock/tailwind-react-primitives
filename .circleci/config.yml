@@ -102,12 +102,12 @@ workflows:
       - test:
           requires:
             - install
-          filters:
-            tags:
-              only: /^v.*/
       - build:
           requires:
             - install
+          filters:
+            tags:
+              only: /^v.*/
       - publish:
           requires:
             - build
