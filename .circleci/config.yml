@@ -54,7 +54,7 @@ jobs:
           root: ~/tailwind-react-primitives
           paths: .
 
-  deploy-and-publish:
+  publish:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -75,15 +75,13 @@ jobs:
 workflows:
   version: 2
 
-  build-and-deploy:
+  ci:
     jobs:
       - build:
           filters:
             tags:
-              only: /^v.*/
-      - deploy-and-publish:
-          requires:
-            - build
+              ignore: /.*/
+      - publish:
           filters:
             tags:
               only: /^v.*/
