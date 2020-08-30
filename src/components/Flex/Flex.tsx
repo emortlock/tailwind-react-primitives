@@ -5,7 +5,7 @@ import React from 'react'
 
 import { Box } from '../Box'
 
-interface FlexProps extends BoxProps {
+export interface FlexProps extends BoxProps {
   col?: boolean
   reverse?: boolean
   wrap?: boolean

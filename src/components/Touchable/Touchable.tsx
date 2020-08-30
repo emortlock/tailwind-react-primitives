@@ -7,7 +7,7 @@ import { Base } from '../Base'
 
 const focusableElements = ['input', 'select', 'textarea', 'button', 'a']
 
-interface TouchableProps extends BaseProps, ReactButtonProps {
+export interface TouchableProps extends BaseProps, ReactButtonProps {
   onTouch?: (e: React.MouseEvent | React.KeyboardEvent) => void
 }
 
