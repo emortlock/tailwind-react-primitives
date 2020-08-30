@@ -5,12 +5,7 @@ version: 2
 defaults: &defaults
   working_directory: ~/tailwind-react-primitives
   docker:
-    - image: circleci/node:stretch
-
-setupGit: &setupGit
-  run: |
-    git config user.email "$GH_EMAIL" &&
-    git config user.name "$GH_USERNAME"
+    - image: circleci/node:lts
 
 jobs:
   install:
@@ -105,6 +100,7 @@ workflows:
             tags:
               only: /^v.*/
       - publish:
+          context: npm
           requires:
             - build
           filters:
