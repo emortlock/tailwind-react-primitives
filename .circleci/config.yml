@@ -95,13 +95,16 @@ workflows:
 
   ci:
     jobs:
-      - install
+      - install:
+          filters:
+            tags:
+              only: /^v.*/
       - test:
           requires:
             - install
           filters:
             tags:
-              ignore: /.*/
+              only: /^v.*/
       - build:
           requires:
             - install
