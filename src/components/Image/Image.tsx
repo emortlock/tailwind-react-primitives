@@ -1,16 +1,24 @@
-import type { HTMLImageProps, ReactImageProps } from '../../types'
-import type { BaseProps } from '../Base'
+import type { HTMLElementTag, ReactComponentProps } from '../../types'
+import type { BaseProps, BaseWithComponentProps } from '../Base'
 
 import React from 'react'
 
-import { Base } from '../Base'
+import { RawBase as Base } from '../Base'
 import { Box } from '../Box'
 
-export interface ImageProps extends BaseProps, ReactImageProps {
+export interface ImageProps<E extends HTMLElement> extends BaseProps<E> {
   aspectRatio?: number
 }
 
-const Image = ({
+export type ImageWithComponentProps<
+  E extends HTMLElement = HTMLImageElement,
+  T extends HTMLElementTag = 'img'
+> = ImageProps<E> & ReactComponentProps<T>
+
+const Image = <
+  E extends HTMLElement = HTMLImageElement,
+  T extends HTMLElementTag = 'img'
+>({
   as = 'img',
   children,
   aspectRatio = 1,
@@ -18,15 +26,15 @@ const Image = ({
   w = 'full',
   text,
   ...rest
-}: ImageProps) => (
+}: ImageWithComponentProps<E, T>) => (
   <Box relative w={w} text={text}>
     <Box bg={bg} style={{ paddingBottom: `${100 / aspectRatio}%` }} />
-    <Base<HTMLImageElement, HTMLImageProps>
+    <Base<E, T>
       as={as}
       absolute
       inset={0}
       w="full"
-      {...rest}
+      {...(rest as BaseWithComponentProps<E, T>)}
     />
     {children && (
       <Box absolute inset={0} flex items="end">
@@ -36,4 +44,8 @@ const Image = ({
   </Box>
 )
 
-export default Image
+export const RawImage = Image
+
+export default React.forwardRef<HTMLImageElement, ImageWithComponentProps>(
+  (props, ref) => <Image {...props} innerRef={ref} />,
+)

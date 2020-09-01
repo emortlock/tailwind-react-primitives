@@ -1,1 +1,6 @@
-export { default as Base, BaseProps } from './Base'
+export {
+  default as Base,
+  RawBase,
+  BaseProps,
+  BaseWithComponentProps,
+} from './Base'

@@ -2,10 +2,10 @@
 
 exports[`Text renders matching snapshot 1`] = `
 <DocumentFragment>
-  <p
+  <span
     class="leading-normal"
   >
     Hello World
-  </p>
+  </span>
 </DocumentFragment>
 `;

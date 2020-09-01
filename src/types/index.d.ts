@@ -1,2 +1,2 @@
-export * from './ElementProps'
-export * from './TailwindProps'
+export * from './ComponentTypes'
+export * from './TailwindTypes'

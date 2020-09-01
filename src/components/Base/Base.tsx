@@ -1,23 +1,36 @@
-import type { TailwindProps } from '../../types'
+import type {
+  TailwindProps,
+  InnerRef,
+  ReactComponentProps,
+  HTMLElementTag,
+} from '../../types'
 import React from 'react'
 import classnames from 'classnames'
 
 import { filterProps, getTailwindClassNames, tailwindProps } from '../../utils'
 
-export interface BaseProps extends TailwindProps {
+export interface BaseProps<E extends HTMLElement>
+  extends TailwindProps,
+    InnerRef<E> {
   as?: React.ElementType
 }
 
+export type BaseWithComponentProps<
+  E extends HTMLElement = HTMLDivElement,
+  T extends HTMLElementTag = 'div'
+> = BaseProps<E> & ReactComponentProps<T>
+
 const Base = <
-  A extends HTMLElement = HTMLDivElement,
-  T extends React.HTMLAttributes<A> = React.HTMLAttributes<A>
+  E extends HTMLElement = HTMLDivElement,
+  T extends HTMLElementTag = 'div'
 >({
   as = 'div',
   children,
   className,
   focusable,
+  innerRef,
   ...rest
-}: BaseProps & React.DetailedHTMLProps<T, A>) => {
+}: BaseWithComponentProps<E, T>) => {
   const Component = as
 
   const focusProps = focusable
@@ -40,11 +53,15 @@ const Base = <
         ),
         className,
       )}
-      // ref={innerRef} - TODO: use hook
+      ref={innerRef}
     >
       {children}
     </Component>
   )
 }
 
-export default Base
+export const RawBase = Base
+
+export default React.forwardRef<HTMLDivElement, BaseWithComponentProps>(
+  (props, ref) => <Base {...props} innerRef={ref} />,
+)

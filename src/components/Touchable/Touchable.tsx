@@ -1,66 +1,71 @@
-import type { ReactButtonProps, HTMLButtonProps } from '../../types'
-import type { BaseProps } from '../Base'
+import type { BaseProps, BaseWithComponentProps } from '../Base'
+import type { HTMLElementTag, ReactComponentProps } from 'types'
 
-import React, { PureComponent } from 'react'
+import React from 'react'
 
-import { Base } from '../Base'
+import { RawBase as Base } from '../Base'
 
 const focusableElements = ['input', 'select', 'textarea', 'button', 'a']
 
-export interface TouchableProps extends BaseProps, ReactButtonProps {
+export interface TouchableProps<E extends HTMLElement> extends BaseProps<E> {
   onTouch?: (e: React.MouseEvent | React.KeyboardEvent) => void
+  disabled?: boolean
 }
 
-class Touchable extends PureComponent<TouchableProps> {
-  constructor(props: TouchableProps) {
-    super(props)
+export type TouchableWithComponentProps<
+  E extends HTMLElement = HTMLButtonElement,
+  T extends HTMLElementTag = 'button'
+> = TouchableProps<E> & ReactComponentProps<T>
 
-    this.handleKeyPress = this.handleKeyPress.bind(this)
-  }
+const Touchable = <
+  E extends HTMLElement = HTMLButtonElement,
+  T extends HTMLElementTag = 'button'
+>({
+  as = 'button',
+  children,
+  tabIndex,
+  disabled = false,
+  onTouch,
+  ...rest
+}: TouchableWithComponentProps<E, T>) => {
+  const handleKeyPress = React.useCallback(
+    (e: React.KeyboardEvent) => {
+      if (
+        onTouch &&
+        (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar')
+      ) {
+        e.preventDefault()
+        onTouch(e)
+      }
+    },
+    [onTouch],
+  )
 
-  handleKeyPress(e: React.KeyboardEvent) {
-    const { onTouch } = this.props
-    if (
-      onTouch &&
-      (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar')
-    ) {
-      e.preventDefault()
-      onTouch(e)
-    }
-  }
+  const isSemantic = typeof as === 'string' && focusableElements.includes(as)
 
-  render() {
-    const {
-      as = 'button',
-      children,
-      tabIndex,
-      disabled = false,
-      onTouch,
-      ...rest
-    } = this.props
-
-    const isSemantic = typeof as === 'string' && focusableElements.includes(as)
-
-    return (
-      <Base<HTMLButtonElement, HTMLButtonProps>
-        as={as}
-        select="none"
-        cursor={disabled ? 'default' : 'pointer'}
-        pointerEvents={disabled ? 'none' : undefined}
-        focusable
-        role={!isSemantic ? 'button' : undefined}
-        tabIndex={tabIndex || (!isSemantic && !disabled ? 0 : undefined)}
-        opacity={disabled ? 50 : undefined}
-        disabled={disabled}
-        aria-disabled={disabled || undefined}
-        onClick={onTouch}
-        onKeyPress={!isSemantic && !disabled ? this.handleKeyPress : undefined}
-        {...rest}
-      >
-        {children}
-      </Base>
-    )
-  }
+  return (
+    <Base<E, T>
+      as={as}
+      select="none"
+      cursor={disabled ? 'default' : 'pointer'}
+      pointerEvents={disabled ? 'none' : undefined}
+      focusable
+      role={!isSemantic ? 'button' : undefined}
+      tabIndex={tabIndex || (!isSemantic && !disabled ? 0 : undefined)}
+      opacity={disabled ? 50 : undefined}
+      disabled={disabled}
+      aria-disabled={disabled || undefined}
+      onClick={!disabled ? onTouch : undefined}
+      onKeyPress={!isSemantic && !disabled ? handleKeyPress : undefined}
+      {...(rest as BaseWithComponentProps<E, T>)}
+    >
+      {children}
+    </Base>
+  )
 }
 
-export default Touchable
+export const RawTouchable = Touchable
+
+export default React.forwardRef<HTMLButtonElement, TouchableWithComponentProps>(
+  (props, ref) => <Touchable {...props} innerRef={ref} />,
+)

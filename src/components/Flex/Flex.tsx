@@ -1,18 +1,30 @@
-import type { FlexValue } from '../../types'
-import type { BoxProps } from '../Box'
+import type {
+  FlexValue,
+  HTMLElementTag,
+  ReactComponentProps,
+} from '../../types'
+import type { BoxProps, BoxWithComponentProps } from '../Box'
 
 import React from 'react'
 
-import { Box } from '../Box'
+import { RawBox as Box } from '../Box'
 
-export interface FlexProps extends BoxProps {
+export interface FlexProps<E extends HTMLElement> extends BoxProps<E> {
   col?: boolean
   reverse?: boolean
   wrap?: boolean
   wrapReverse?: boolean
 }
 
-const Flex = ({
+export type FlexWithComponentProps<
+  E extends HTMLElement = HTMLDivElement,
+  T extends HTMLElementTag = 'div'
+> = FlexProps<E> & ReactComponentProps<T>
+
+const Flex = <
+  E extends HTMLElement = HTMLDivElement,
+  T extends HTMLElementTag = 'div'
+>({
   as = 'div',
   children,
   inline = false,
@@ -22,11 +34,11 @@ const Flex = ({
   wrap = false,
   wrapReverse = false,
   ...rest
-}: FlexProps) => {
+}: FlexWithComponentProps<E, T>) => {
   const el = as === 'div' && (inline || inlineFlex) ? 'span' : as
 
   return (
-    <Box
+    <Box<E, T>
       as={el}
       flex={
         [
@@ -38,11 +50,15 @@ const Flex = ({
         ].filter(Boolean) as FlexValue[]
       }
       inlineFlex={inline || inlineFlex}
-      {...rest}
+      {...(rest as BoxWithComponentProps<E, T>)}
     >
       {children}
     </Box>
   )
 }
 
-export default Flex
+export const RawFlex = Flex
+
+export default React.forwardRef<HTMLDivElement, FlexWithComponentProps>(
+  (props, ref) => <Flex {...props} innerRef={ref} />,
+)

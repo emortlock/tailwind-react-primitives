@@ -1,1 +1,1 @@
-export { default as Box, BoxProps } from './Box'
+export { default as Box, RawBox, BoxProps, BoxWithComponentProps } from './Box'
