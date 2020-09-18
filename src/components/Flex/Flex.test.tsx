@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, RenderResult } from '@testing-library/react'
 
-import { Flex } from '.'
+import { RawFlex as Flex } from '.'
 
 const setup = (
   testProps = {},

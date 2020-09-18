@@ -1,43 +1,28 @@
-import type { HTMLElementTag, ReactComponentProps } from '../../types'
-import type { BaseProps, BaseWithComponentProps } from '../Base'
+import type { BaseProps } from '../Base'
 
 import React from 'react'
 
 import { RawBase as Base } from '../Base'
 
-export type BoxProps<E extends HTMLElement> = BaseProps<E>
+export type BoxProps<E extends HTMLElement = HTMLDivElement> = BaseProps<E>
 
-export type BoxWithComponentProps<
-  E extends HTMLElement = HTMLDivElement,
-  T extends HTMLElementTag = 'div'
-> = BoxProps<E> & ReactComponentProps<T>
-
-const Box = <
-  E extends HTMLElement = HTMLDivElement,
-  T extends HTMLElementTag = 'div'
->({
+export const RawBox = <E extends HTMLElement = HTMLDivElement>({
   as = 'div',
   children,
   inline = false,
   inlineBlock = false,
+  wrap,
   ...rest
-}: BoxWithComponentProps<E, T>) => {
+}: BaseProps<E>) => {
   const el = as === 'div' && (inline || inlineBlock) ? 'span' : as
 
   return (
-    <Base<E, T>
-      as={el}
-      inline={inline}
-      inlineBlock={inlineBlock}
-      {...(rest as BaseWithComponentProps<E, T>)}
-    >
+    <Base<E> as={el} inline={inline} inlineBlock={inlineBlock} {...rest}>
       {children}
     </Base>
   )
 }
 
-export const RawBox = Box
-
-export default React.forwardRef<HTMLDivElement, BoxWithComponentProps>(
-  (props, ref) => <Box {...props} innerRef={ref} />,
-)
+export const Box = React.forwardRef<HTMLDivElement, BoxProps>((props, ref) => (
+  <RawBox {...props} innerRef={ref} />
+))

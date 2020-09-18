@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, RenderResult } from '@testing-library/react'
 
-import { Box } from '.'
+import { RawBox as Box } from '.'
 
 const setup = (
   testProps = {},

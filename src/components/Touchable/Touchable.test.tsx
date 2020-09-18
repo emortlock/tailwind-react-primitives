@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, RenderResult } from '@testing-library/react'
 
-import { Touchable } from '.'
+import { RawTouchable as Touchable } from '.'
 
 const setup = (
   testProps = {},

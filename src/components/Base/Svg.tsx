@@ -1,12 +1,16 @@
 import type { TailwindProps } from '../../types'
+
 import React from 'react'
 import classnames from 'classnames'
 
 import { filterProps, getTailwindClassNames, tailwindProps } from '../../utils'
 
-export interface BaseProps<E extends HTMLElement = HTMLDivElement>
+export interface SvgProps<E extends SVGElement = SVGElement>
   extends TailwindProps,
-    Omit<React.HTMLProps<E>, 'as' | 'list' | 'content'> {
+    Omit<
+      React.SVGProps<E>,
+      'pointerEvents' | 'overflow' | 'focusable' | 'cursor'
+    > {
   as?: React.ElementType
   innerRef?:
     | ((instance: E | null) => void)
@@ -14,14 +18,14 @@ export interface BaseProps<E extends HTMLElement = HTMLDivElement>
     | null
 }
 
-export const RawBase = <E extends HTMLElement = HTMLDivElement>({
+export const RawSvg = <E extends SVGElement = SVGElement>({
   as = 'div',
   children,
   className,
   focusable,
   innerRef,
   ...rest
-}: BaseProps<E>) => {
+}: SvgProps<E>) => {
   const Component = as
 
   const focusProps = focusable
@@ -51,6 +55,6 @@ export const RawBase = <E extends HTMLElement = HTMLDivElement>({
   )
 }
 
-export const Base = React.forwardRef<HTMLDivElement, BaseProps<HTMLDivElement>>(
-  (props, ref) => <RawBase {...props} innerRef={ref} />,
+export const Svg = React.forwardRef<SVGElement, SvgProps<SVGElement>>(
+  (props, ref) => <RawSvg {...props} innerRef={ref} />,
 )

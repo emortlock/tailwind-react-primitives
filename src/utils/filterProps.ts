@@ -1,7 +1,7 @@
 import includes from 'lodash.includes'
 
-export default (
-  componentProps: Record<string, unknown>,
+export default <T extends {} = Record<string, unknown>>(
+  componentProps: T,
   filterList: string[],
 ) =>
   Object.keys(componentProps).reduce((newProps, prop) => {
@@ -10,6 +10,6 @@ export default (
     }
     return {
       ...newProps,
-      [prop]: componentProps[prop],
+      [prop]: componentProps[prop as keyof T],
     }
   }, {})

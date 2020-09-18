@@ -1,6 +1,1 @@
-export {
-  default as Image,
-  RawImage,
-  ImageProps,
-  ImageWithComponentProps,
-} from './Image'
+export * from './Image'

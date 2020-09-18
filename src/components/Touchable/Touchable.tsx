@@ -1,5 +1,4 @@
-import type { BaseProps, BaseWithComponentProps } from '../Base'
-import type { HTMLElementTag, ReactComponentProps } from 'types'
+import type { BaseProps } from '../Base'
 
 import React from 'react'
 
@@ -7,29 +6,22 @@ import { RawBase as Base } from '../Base'
 
 const focusableElements = ['input', 'select', 'textarea', 'button', 'a']
 
-export interface TouchableProps<E extends HTMLElement> extends BaseProps<E> {
-  onTouch?: (e: React.MouseEvent | React.KeyboardEvent) => void
+export interface TouchableProps<E extends HTMLElement = HTMLButtonElement>
+  extends BaseProps<E> {
+  onTouch?: (e: React.MouseEvent<E> | React.KeyboardEvent<E>) => void
   disabled?: boolean
 }
 
-export type TouchableWithComponentProps<
-  E extends HTMLElement = HTMLButtonElement,
-  T extends HTMLElementTag = 'button'
-> = TouchableProps<E> & ReactComponentProps<T>
-
-const Touchable = <
-  E extends HTMLElement = HTMLButtonElement,
-  T extends HTMLElementTag = 'button'
->({
+export const RawTouchable = <E extends HTMLElement = HTMLButtonElement>({
   as = 'button',
   children,
   tabIndex,
   disabled = false,
   onTouch,
   ...rest
-}: TouchableWithComponentProps<E, T>) => {
+}: TouchableProps<E>) => {
   const handleKeyPress = React.useCallback(
-    (e: React.KeyboardEvent) => {
+    (e: React.KeyboardEvent<E>) => {
       if (
         onTouch &&
         (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar')
@@ -44,7 +36,7 @@ const Touchable = <
   const isSemantic = typeof as === 'string' && focusableElements.includes(as)
 
   return (
-    <Base<E, T>
+    <Base<E>
       as={as}
       select="none"
       cursor={disabled ? 'default' : 'pointer'}
@@ -57,15 +49,14 @@ const Touchable = <
       aria-disabled={disabled || undefined}
       onClick={!disabled ? onTouch : undefined}
       onKeyPress={!isSemantic && !disabled ? handleKeyPress : undefined}
-      {...(rest as BaseWithComponentProps<E, T>)}
+      {...rest}
     >
       {children}
     </Base>
   )
 }
 
-export const RawTouchable = Touchable
-
-export default React.forwardRef<HTMLButtonElement, TouchableWithComponentProps>(
-  (props, ref) => <Touchable {...props} innerRef={ref} />,
-)
+export const Touchable = React.forwardRef<
+  HTMLButtonElement,
+  TouchableProps<HTMLButtonElement>
+>((props, ref) => <RawTouchable {...props} innerRef={ref} />)

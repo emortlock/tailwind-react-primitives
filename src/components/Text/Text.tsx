@@ -1,27 +1,19 @@
-import type { ReactComponentProps, HTMLElementTag } from '../../types'
-import type { BaseProps, BaseWithComponentProps } from '../Base'
+import type { BaseProps } from '../Base'
 
 import React from 'react'
 
-import { RawBase } from '../Base'
+import { RawBase as Base } from '../Base'
 import { getAsArray } from '../../utils'
 
-export interface TextProps<E extends HTMLElement> extends BaseProps<E> {
+export interface TextProps<E extends HTMLElement = HTMLSpanElement>
+  extends Omit<BaseProps<E>, 'size'> {
   bold?: boolean
   size?: string
   color?: string
   weight?: string
 }
 
-export type TextWithComponentProps<
-  E extends HTMLElement = HTMLSpanElement,
-  T extends HTMLElementTag = 'span'
-> = TextProps<E> & ReactComponentProps<T>
-
-const Text = <
-  E extends HTMLElement = HTMLSpanElement,
-  T extends HTMLElementTag = 'span'
->({
+export const RawText = <E extends HTMLElement = HTMLSpanElement>({
   as = 'span',
   children,
   bold = false,
@@ -32,7 +24,7 @@ const Text = <
   weight,
   leading = 'normal',
   ...rest
-}: TextWithComponentProps<E, T>) => {
+}: TextProps<E>) => {
   const fontValue = [...getAsArray(font), bold ? 'bold' : weight].filter(
     Boolean,
   ) as string[]
@@ -42,20 +34,18 @@ const Text = <
   ) as string[]
 
   return (
-    <RawBase<E, T>
+    <Base<E>
       as={as}
       font={fontValue}
       text={textValue}
       leading={leading}
-      {...(rest as BaseWithComponentProps<E, T>)}
+      {...rest}
     >
       {children}
-    </RawBase>
+    </Base>
   )
 }
 
-export const RawText = Text
-
-export default React.forwardRef<HTMLSpanElement, TextWithComponentProps>(
-  (props, ref) => <Text {...props} innerRef={ref} />,
+export const Text = React.forwardRef<HTMLSpanElement, TextProps>(
+  (props, ref) => <RawText {...props} innerRef={ref} />,
 )

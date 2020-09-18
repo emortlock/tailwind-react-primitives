@@ -1,6 +1,2 @@
-export {
-  default as Base,
-  RawBase,
-  BaseProps,
-  BaseWithComponentProps,
-} from './Base'
+export * from './Base'
+export * from './Svg'

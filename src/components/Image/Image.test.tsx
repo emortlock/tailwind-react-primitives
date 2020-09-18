@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, RenderResult } from '@testing-library/react'
 
-import { Image } from '.'
+import { RawImage as Image } from '.'
 
 const setup = (
   testProps = {},

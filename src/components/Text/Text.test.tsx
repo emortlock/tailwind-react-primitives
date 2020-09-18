@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, RenderResult } from '@testing-library/react'
 
-import { Text } from '.'
+import { RawText as Text } from '.'
 
 const setup = (
   testProps = {},

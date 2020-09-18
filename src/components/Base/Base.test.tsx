@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, RenderResult } from '@testing-library/react'
 
-import { Base } from '.'
+import { RawBase as Base } from '.'
 
 const setup = (
   testProps = {},

@@ -1,1 +1,1 @@
-export { default as Touchable, TouchableProps } from './Touchable'
+export * from './Touchable'

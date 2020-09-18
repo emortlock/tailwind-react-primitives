@@ -6,3 +6,4 @@ export * from './components/Text'
 export * from './components/Touchable'
 
 export * from './utils'
+export * from './types'

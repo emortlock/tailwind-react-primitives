@@ -109,7 +109,7 @@ type W = string | number
 type Container = boolean
 type Opacity = string | number
 type Shadow = string | boolean
-type List = 'none' | 'list' | 'decimal'
+type List = 'none' | 'disc' | 'decimal'
 type Outline = string
 type Appearance = string
 type Select = string
@@ -132,6 +132,7 @@ type Focusable = boolean
 
 export interface TailwindProps {
   // Display
+  /** Creates a block-level element */
   'block'?: Block
   'block-hover'?: Block
   'block-focus'?: Block
@@ -150,6 +151,7 @@ export interface TailwindProps {
   'hidden-lg'?: Hidden
   'hidden-xl'?: Hidden
 
+  /** Creates an inline element */
   'inline'?: Inline
   'inline-hover'?: Inline
   'inline-focus'?: Inline
@@ -159,6 +161,7 @@ export interface TailwindProps {
   'inline-lg'?: Inline
   'inline-xl'?: Inline
 
+  /** Creates an inline block-level element */
   'inlineBlock'?: InlineBlock
   'inlineBlock-hover'?: InlineBlock
   'inlineBlock-focus'?: InlineBlock
@@ -764,6 +767,7 @@ export interface TailwindProps {
   'w-xl'?: W
 
   // Misc
+  /** A component for fixing an element's width to the current breakpoint */
   'container'?: Container
   'container-hover'?: Container
   'container-focus'?: Container
@@ -773,6 +777,7 @@ export interface TailwindProps {
   'container-lg'?: Container
   'container-xl'?: Container
 
+  /** Utility for controlling the opacity of an element */
   'opacity'?: Opacity
   'opacity-hover'?: Opacity
   'opacity-focus'?: Opacity
