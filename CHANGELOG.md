@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.8.11](https://github.com/emortlock/tailwind-react-primitives/compare/v0.8.10...v0.8.11) (2020-09-18)
+
+
+### Features
+
+* added forwardRef support and updated element TS types ([77f728e](https://github.com/emortlock/tailwind-react-primitives/commit/77f728eb2aaa2c9efb4255c4e467da32512121b4))
+* updated type structure and refactored ([f315688](https://github.com/emortlock/tailwind-react-primitives/commit/f315688664dc9194625f63f5cde11bf2faa61a9e))
+
 ### [0.8.10](https://github.com/emortlock/tailwind-react-primitives/compare/v0.8.9...v0.8.10) (2020-08-30)
 
 

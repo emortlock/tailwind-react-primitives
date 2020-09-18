@@ -1,6 +1,6 @@
 {
   "name": "tailwind-react-primitives",
-  "version": "0.8.10",
+  "version": "0.8.11",
   "description": "React component primitives that provide utility props for Tailwind CSS",
   "repository": {
     "type": "git",
